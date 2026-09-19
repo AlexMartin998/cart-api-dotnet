@@ -1,0 +1,14 @@
+{
+  "name": "CartAPI",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
+  "forwardPorts": [5141],
+  "postCreateCommand": "dotnet restore && dotnet tool install --global dotnet-ef",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "humao.rest-client"
+      ]
+    }
+  }
+}
