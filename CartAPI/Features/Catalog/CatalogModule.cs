@@ -1,5 +1,7 @@
 using CartAPI.Features.Catalog.Categories.Infrastructure.Persistence.Configurations;
 using CartAPI.Features.Catalog.Categories.Infrastructure.Seeding;
+using CartAPI.Features.Catalog.Products.Application.Queries;
+using CartAPI.Features.Catalog.Products.Infrastructure.Http;
 using CartAPI.Features.Catalog.Products.Infrastructure.Persistence.Configurations;
 using CartAPI.Features.Catalog.Products.Infrastructure.Seeding;
 using CartAPI.Shared.Infrastructure.Persistence;
@@ -14,6 +16,8 @@ public static class CatalogModule
     
     public static IServiceCollection AddCatalogModule(this IServiceCollection services)
     {
+        services.AddScoped<SearchProductsQueryHandler>();
+
         services.AddScoped<IDataSeeder, CategorySeeder>();
         services.AddScoped<IDataSeeder, ProductSeeder>();
         return services;
@@ -24,5 +28,9 @@ public static class CatalogModule
         builder.ApplyConfiguration(new CategoryConfiguration());
         builder.ApplyConfiguration(new ProductConfiguration());
     }
+
+
+    public static IEndpointRouteBuilder MapCatalogEndpoints(this IEndpointRouteBuilder app) =>
+        app.MapProductEndpoints();
 
 }

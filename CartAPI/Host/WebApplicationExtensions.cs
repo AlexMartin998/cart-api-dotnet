@@ -1,8 +1,10 @@
 using CartAPI.Features.Accounts;
+using CartAPI.Features.Catalog;
 using CartAPI.Shared.Infrastructure.Http;
 using CartAPI.Shared.Infrastructure.Http.OpenApi;
 
 namespace CartAPI.Host;
+
 
 public static class WebApplicationExtensions
 {
@@ -21,6 +23,7 @@ public static class WebApplicationExtensions
     {
         app.MapApiDocumentation();
         app.MapAccountsEndpoints();
+        app.MapCatalogEndpoints();
         return app;
     }
 }
