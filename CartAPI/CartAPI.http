@@ -1,4 +1,21 @@
 @CartAPI_HostAddress = http://localhost:5141
 
-GET {{CartAPI_HostAddress}}/weatherforecast/
-Accept: application/json
+### Login (el token se reutiliza abajo)
+# @name login
+POST {{CartAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "cliente@cartapi.local",
+  "password": "Cliente123!"
+}
+
+###
+@token = {{login.response.body.accessToken}}
+
+### Usuario autenticado
+GET {{CartAPI_HostAddress}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### Sin token -> 401
+GET {{CartAPI_HostAddress}}/api/auth/me

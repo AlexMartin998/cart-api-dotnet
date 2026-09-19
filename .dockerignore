@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+.git/
+.devcontainer/
+CartAPI.Tests/
+*.md
+.env
