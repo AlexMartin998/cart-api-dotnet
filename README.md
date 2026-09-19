@@ -29,6 +29,12 @@ dotnet user-secrets set "ConnectionStrings:Default" "Server=localhost,1433;Datab
 dotnet user-secrets set "Jwt:Key" "$(openssl rand -base64 48)"
 cd ..
 dotnet run --project CartAPI               # Development, http://localhost:5141
+
+
+# -------
+dotnet watch --project CartAPI run \
+  --urls http://0.0.0.0:5141 \
+  --property:StaticWebAssetsEnabled=false
 ```
 
 - `TrustServerCertificate=True` hace falta con un SQL Server de desarrollo (certificado autofirmado).
