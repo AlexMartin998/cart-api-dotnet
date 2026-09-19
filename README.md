@@ -32,9 +32,17 @@ dotnet run --project CartAPI               # Development, http://localhost:5141
 
 
 # -------
+dotnet restore
+dotnet build
+
 dotnet watch --project CartAPI run \
   --urls http://0.0.0.0:5141 \
   --property:StaticWebAssetsEnabled=false
+
+
+
+dotnet ef database update  
+
 ```
 
 - `TrustServerCertificate=True` hace falta con un SQL Server de desarrollo (certificado autofirmado).

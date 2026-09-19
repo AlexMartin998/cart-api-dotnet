@@ -32,5 +32,6 @@ internal static class ArchitectureFixture
         ("Accounts", ContextShared),
         ("Catalog", "Categories"),
         ("Catalog", "Products"),
+        ("Catalog", ContextShared),
     ];
 }
