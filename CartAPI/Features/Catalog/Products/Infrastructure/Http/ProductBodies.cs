@@ -21,3 +21,20 @@ public sealed record SearchProductsParameters(
     }
 
 }
+
+
+public sealed record CreateProductBody(
+    [property: Required, MaxLength(20)] string Code,
+    [property: Required, MaxLength(120)] string Name,
+    [property: MaxLength(500)] string? Description,
+    [property: Range(typeof(decimal), "0.01", "1000000", ParseLimitsInInvariantCulture = true)] decimal Price,
+    [property: Range(0, 1_000_000)] int Stock,
+    [property: Range(1, int.MaxValue)] int CategoryId);
+
+public sealed record UpdateProductBody(
+    [property: Required, MaxLength(120)] string Name,
+    [property: MaxLength(500)] string? Description,
+    [property: Range(typeof(decimal), "0.01", "1000000", ParseLimitsInInvariantCulture = true)] decimal Price,
+    [property: Required, Range(0, 1_000_000)] int? Stock,
+    [property: Range(1, int.MaxValue)] int CategoryId);
+

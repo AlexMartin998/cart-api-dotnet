@@ -10,8 +10,24 @@ Content-Type: application/json
   "password": "Cliente123!"
 }
 
+### Login Admin
+# @name loginadmin
+POST {{CartAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@cartapi.local",
+  "password": "Admin123!"
+}
+
+
 ###
 @token = {{login.response.body.accessToken}}
+
+
+### 
+@admintoken = {{loginadmin.response.body.accessToken}}
+
 
 ### Usuario autenticado
 GET {{CartAPI_HostAddress}}/api/auth/me
@@ -108,4 +124,38 @@ Authorization: Bearer {{token}}
 
 
 
+
+### Admin endpoints
+### Create product
+POST {{CartAPI_HostAddress}}/api/products
+Authorization: Bearer {{admintoken}}
+# Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Iphone 18 Pro Max",
+  "code": "SKU-IP18PM",
+  "description": "Iphone 18 Pro Max: 6.7 inch",
+  "price": 569.99,
+  "categoryId": 1,
+  "stock": 100
+}
+
+
+### Update product
+PUT {{CartAPI_HostAddress}}/api/products/20
+Authorization: Bearer {{admintoken}}
+Content-Type: application/json
+
+{
+  "name": "Iphone 18 Pro Max UPD",
+  "price": 560.99,
+  "categoryId": 1,
+  "stock": 90
+}
+
+
+### Deactivate product
+DELETE {{CartAPI_HostAddress}}/api/products/20
+Authorization: Bearer {{admintoken}}
 

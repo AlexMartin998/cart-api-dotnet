@@ -27,4 +27,7 @@ public static class ProductErrors
     public static NotFoundException NotFound(int productId) =>
         new("product_not_found", $"Product {productId} does not exist.");
 
+    public static ConflictException CodeTaken(string code) =>
+        new("product_code_taken", $"There is already a product with code {code}.");
+
 }
