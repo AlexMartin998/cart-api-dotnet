@@ -58,7 +58,28 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "productId": 4,
+  "productId": 2,
   "quantity": 1
 }
+
+
+### Set item quantity in cart
+PUT {{CartAPI_HostAddress}}/api/cart/items/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quantity": 6
+}
+
+
+### Remove item from cart
+DELETE {{CartAPI_HostAddress}}/api/cart/items/2
+Authorization: Bearer {{token}}
+
+
+### Clear cart
+DELETE {{CartAPI_HostAddress}}/api/cart
+Authorization: Bearer {{token}}
+
 

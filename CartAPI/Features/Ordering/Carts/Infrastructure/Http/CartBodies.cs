@@ -7,3 +7,7 @@ namespace CartAPI.Features.Ordering.Carts.Infrastructure.Http;
 public sealed record AddCartItemBody(
     [property: Range(1, int.MaxValue)] int ProductId,
     [property: Range(1, Cart.MaxQuantityPerLine)] int Quantity);
+
+
+public sealed record SetCartItemQuantityBody(
+    [property: Range(1, Cart.MaxQuantityPerLine)] int Quantity);

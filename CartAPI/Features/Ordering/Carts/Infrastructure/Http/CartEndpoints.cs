@@ -34,6 +34,47 @@ internal static class CartEndpoints
         .ProducesProblem(StatusCodes.Status404NotFound)
         .ProducesProblem(StatusCodes.Status409Conflict);
 
+
+        // ------------
+        cart.MapPut("/items/{productId:int}",
+            async (
+                int productId, SetCartItemQuantityBody body, ICurrentUser user,
+                SetCartItemQuantityCommandHandler handler, CancellationToken ct
+            ) => TypedResults.Ok(await handler.HandleAsync(new SetCartItemQuantityCommand(user.Id, productId, body.Quantity), ct))
+        )
+        .WithName("SetCartItemQuantity")
+        .WithSummary("Set the quantity of an item in the current user's cart")
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .ProducesProblem(StatusCodes.Status401Unauthorized)
+        .ProducesProblem(StatusCodes.Status404NotFound)
+        .ProducesProblem(StatusCodes.Status409Conflict);
+
+
+        // ------------
+        cart.MapDelete("/items/{productId:int}",
+            async (
+                int productId, ICurrentUser user, RemoveCartItemCommandHandler handler, CancellationToken ct) =>
+                TypedResults.Ok(await handler.HandleAsync(new RemoveCartItemCommand(user.Id, productId), ct))
+        )
+        .WithName("RemoveCartItem")
+        .WithSummary("Remove an item from the current user's cart")
+        .ProducesProblem(StatusCodes.Status401Unauthorized)
+        .ProducesProblem(StatusCodes.Status404NotFound);
+
+
+        // ------------
+        cart.MapDelete("/",
+            async (ICurrentUser user, ClearCartCommandHandler handler, CancellationToken ct) =>
+            {
+                await handler.HandleAsync(new ClearCartCommand(user.Id), ct);
+                return TypedResults.NoContent();
+            }
+        )
+        .WithName("ClearCart")
+        .WithSummary("Clear the current user's cart")
+        .ProducesProblem(StatusCodes.Status401Unauthorized);
+
+
         return app;
     }
 }

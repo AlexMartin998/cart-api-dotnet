@@ -18,6 +18,9 @@ public static class OrderingModule
         services.AddScoped<CartPricer>();
         services.AddScoped<GetMyCartQueryHandler>();
         services.AddScoped<AddCartItemCommandHandler>();
+        services.AddScoped<SetCartItemQuantityCommandHandler>();
+        services.AddScoped<RemoveCartItemCommandHandler>();
+        services.AddScoped<ClearCartCommandHandler>();
         return services;
     }
 
