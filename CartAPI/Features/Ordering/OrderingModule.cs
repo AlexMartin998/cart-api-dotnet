@@ -7,6 +7,11 @@ using CartAPI.Features.Ordering.Carts.Infrastructure.Persistence;
 using CartAPI.Features.Ordering.Carts.Infrastructure.Persistence.Configurations;
 using CartAPI.Features.Ordering.Shared.Domain;
 using CartAPI.Features.Ordering.Shared.Infrastructure;
+using CartAPI.Features.Ordering.Orders.Application.Commands;
+using CartAPI.Features.Ordering.Orders.Domain;
+using CartAPI.Features.Ordering.Orders.Infrastructure.Http;
+using CartAPI.Features.Ordering.Orders.Infrastructure.Persistence;
+using CartAPI.Features.Ordering.Orders.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -38,6 +43,8 @@ public static class OrderingModule
         services.AddScoped<SetCartItemQuantityCommandHandler>();
         services.AddScoped<RemoveCartItemCommandHandler>();
         services.AddScoped<ClearCartCommandHandler>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<PlaceOrderCommandHandler>();
         return services;
     }
 
@@ -45,8 +52,11 @@ public static class OrderingModule
     {
         builder.ApplyConfiguration(new CartConfiguration());
         builder.ApplyConfiguration(new CartItemConfiguration());
+        builder.ApplyConfiguration(new OrderConfiguration());
+        builder.ApplyConfiguration(new OrderItemConfiguration());
     }
 
     public static IEndpointRouteBuilder MapOrderingEndpoints(this IEndpointRouteBuilder app) =>
-        app.MapCartEndpoints();
+        app.MapCartEndpoints().MapOrderEndpoints();
+
 }

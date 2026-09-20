@@ -59,7 +59,7 @@ Content-Type: application/json
 
 {
   "productId": 3,
-  "quantity": 3
+  "quantity": 1
 }
 
 
@@ -80,6 +80,15 @@ Authorization: Bearer {{token}}
 
 ### Clear cart
 DELETE {{CartAPI_HostAddress}}/api/cart
+Authorization: Bearer {{token}}
+
+
+
+
+
+
+### Place order
+POST {{CartAPI_HostAddress}}/api/orders
 Authorization: Bearer {{token}}
 
 

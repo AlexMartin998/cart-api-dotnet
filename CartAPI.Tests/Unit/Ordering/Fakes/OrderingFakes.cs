@@ -7,10 +7,24 @@ namespace CartAPI.Tests.Unit.Ordering.Fakes;
 
 internal sealed class FakeCatalog(params ProductSnapshot[] products) : ICatalogStock
 {
+    private readonly Dictionary<int, ProductSnapshot> _products = products.ToDictionary(p => p.ProductId);
+
     public Task<IReadOnlyDictionary<int, ProductSnapshot>> PeekAsync(IReadOnlyCollection<int> productIds, CancellationToken ct) =>
         Task.FromResult<IReadOnlyDictionary<int, ProductSnapshot>>(
-            products.Where(p => productIds.Contains(p.ProductId)).ToDictionary(p => p.ProductId));
+            _products.Values.Where(p => productIds.Contains(p.ProductId)).ToDictionary(p => p.ProductId));
+
+    public Task<StockReservation> TryReserveAsync(int productId, int quantity, CancellationToken ct)
+    {
+        if (!_products.TryGetValue(productId, out var product))
+            return Task.FromResult(StockReservation.Failed(ReservationFailure.ProductNotFound));
+        if (product.Stock < quantity)
+            return Task.FromResult(StockReservation.Failed(ReservationFailure.InsufficientStock, product));
+
+        _products[productId] = product with { Stock = product.Stock - quantity };
+        return Task.FromResult(StockReservation.Reserved(product));
+    }
 }
+
 
 internal sealed class FakeCarts : ICartRepository
 {

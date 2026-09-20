@@ -36,6 +36,7 @@ internal static class ArchitectureFixture
         ("Catalog", ContextShared),
 
         ("Ordering", "Carts"),
+        ("Ordering", "Orders"),
         ("Ordering", ContextShared),
     ];
 }

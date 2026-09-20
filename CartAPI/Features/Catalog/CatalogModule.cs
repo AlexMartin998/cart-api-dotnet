@@ -9,6 +9,8 @@ using CartAPI.Features.Catalog.Products.Infrastructure.Seeding;
 using CartAPI.Shared.Infrastructure.Persistence;
 using CartAPI.Features.Catalog.Contracts;
 using CartAPI.Features.Catalog.Products.Infrastructure.Contracts;
+using CartAPI.Features.Catalog.Products.Domain;
+using CartAPI.Features.Catalog.Products.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace CartAPI.Features.Catalog;
@@ -26,6 +28,7 @@ public static class CatalogModule
 
         // DI: other bounded context ---
         services.AddScoped<ICatalogStock, CatalogStock>();
+        services.AddScoped<IProductRepository, ProductRepository>();
 
         services.AddScoped<IDataSeeder, CategorySeeder>();
         services.AddScoped<IDataSeeder, ProductSeeder>();

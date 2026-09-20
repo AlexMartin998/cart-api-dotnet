@@ -1,6 +1,7 @@
 using CartAPI.Features.Accounts.Auth.Domain;
 using CartAPI.Features.Catalog.Products.Domain;
 using CartAPI.Features.Ordering.Carts.Domain;
+using CartAPI.Features.Ordering.Orders.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace CartAPI.Persistence;
@@ -14,5 +15,9 @@ internal static class CrossContextForeignKeys
         // fk between contexts
         builder.Entity<Cart>().HasOne<User>().WithMany().HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Cascade);
         builder.Entity<CartItem>().HasOne<Product>().WithMany().HasForeignKey(i => i.ProductId).OnDelete(DeleteBehavior.Restrict);
+    
+        // restrict: if a user or product is deleted, the order remains for historical purposes
+        builder.Entity<Order>().HasOne<User>().WithMany().HasForeignKey(o => o.UserId).OnDelete(DeleteBehavior.Restrict);
+        builder.Entity<OrderItem>().HasOne<Product>().WithMany().HasForeignKey(i => i.ProductId).OnDelete(DeleteBehavior.Restrict);
     }
 }
