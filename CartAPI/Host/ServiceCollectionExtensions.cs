@@ -1,5 +1,6 @@
 using CartAPI.Features.Accounts;
 using CartAPI.Features.Catalog;
+using CartAPI.Features.Ordering;
 using CartAPI.Persistence;
 using CartAPI.Shared.Infrastructure.Auth;
 using CartAPI.Shared.Infrastructure.Http;
@@ -22,6 +23,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddAccountsModule(configuration);
         services.AddCatalogModule();
+        services.AddOrderingModule();
         return services;
     }
 

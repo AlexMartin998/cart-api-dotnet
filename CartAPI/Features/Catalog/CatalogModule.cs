@@ -7,6 +7,8 @@ using CartAPI.Features.Catalog.Products.Infrastructure.Http;
 using CartAPI.Features.Catalog.Products.Infrastructure.Persistence.Configurations;
 using CartAPI.Features.Catalog.Products.Infrastructure.Seeding;
 using CartAPI.Shared.Infrastructure.Persistence;
+using CartAPI.Features.Catalog.Contracts;
+using CartAPI.Features.Catalog.Products.Infrastructure.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace CartAPI.Features.Catalog;
@@ -21,6 +23,9 @@ public static class CatalogModule
         services.AddScoped<SearchProductsQueryHandler>();
         services.AddScoped<GetProductQueryHandler>();
         services.AddScoped<ListCategoriesQueryHandler>();
+
+        // DI: other bounded context ---
+        services.AddScoped<ICatalogStock, CatalogStock>();
 
         services.AddScoped<IDataSeeder, CategorySeeder>();
         services.AddScoped<IDataSeeder, ProductSeeder>();

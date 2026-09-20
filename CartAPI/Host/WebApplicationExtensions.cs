@@ -1,5 +1,6 @@
 using CartAPI.Features.Accounts;
 using CartAPI.Features.Catalog;
+using CartAPI.Features.Ordering;
 using CartAPI.Shared.Infrastructure.Http;
 using CartAPI.Shared.Infrastructure.Http.OpenApi;
 
@@ -24,6 +25,7 @@ public static class WebApplicationExtensions
         app.MapApiDocumentation();
         app.MapAccountsEndpoints();
         app.MapCatalogEndpoints();
+        app.MapOrderingEndpoints();
         return app;
     }
 }

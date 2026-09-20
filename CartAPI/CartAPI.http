@@ -43,3 +43,11 @@ Authorization: Bearer {{token}}
 GET {{CartAPI_HostAddress}}/api/categories
 Authorization: Bearer {{token}}
 
+
+
+
+
+### Cart
+GET {{CartAPI_HostAddress}}/api/cart
+Authorization: Bearer {{token}}
+

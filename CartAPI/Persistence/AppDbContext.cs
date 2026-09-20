@@ -1,5 +1,6 @@
 using CartAPI.Features.Accounts;
 using CartAPI.Features.Catalog;
+using CartAPI.Features.Ordering;
 using CartAPI.Shared.Application;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,5 +18,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
         base.OnModelCreating(modelBuilder);
         AccountsModule.ConfigureModel(modelBuilder);
         CatalogModule.ConfigureModel(modelBuilder);
+        OrderingModule.ConfigureModel(modelBuilder);
+        CrossContextForeignKeys.Configure(modelBuilder);
     }
 }

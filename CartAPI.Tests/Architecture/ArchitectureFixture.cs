@@ -24,14 +24,18 @@ internal static class ArchitectureFixture
 
     public const string ContextShared = "Shared";
 
-    public static readonly string[] BoundedContexts = ["Accounts", "Catalog"];
+    public static readonly string[] BoundedContexts = ["Accounts", "Catalog", "Ordering"];
 
     public static readonly (string Context, string Slice)[] Slices =
     [
         ("Accounts", "Auth"),
         ("Accounts", ContextShared),
+
         ("Catalog", "Categories"),
         ("Catalog", "Products"),
         ("Catalog", ContextShared),
+
+        ("Ordering", "Carts"),
+        ("Ordering", ContextShared),
     ];
 }
