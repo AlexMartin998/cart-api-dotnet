@@ -36,3 +36,10 @@ Authorization: Bearer {{token}}
 GET {{CartAPI_HostAddress}}/api/products/3
 Authorization: Bearer {{token}}
 
+
+
+
+### Categories
+GET {{CartAPI_HostAddress}}/api/categories
+Authorization: Bearer {{token}}
+
