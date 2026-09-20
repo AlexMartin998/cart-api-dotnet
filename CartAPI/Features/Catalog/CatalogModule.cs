@@ -17,6 +17,7 @@ public static class CatalogModule
     public static IServiceCollection AddCatalogModule(this IServiceCollection services)
     {
         services.AddScoped<SearchProductsQueryHandler>();
+        services.AddScoped<GetProductQueryHandler>();
 
         services.AddScoped<IDataSeeder, CategorySeeder>();
         services.AddScoped<IDataSeeder, ProductSeeder>();

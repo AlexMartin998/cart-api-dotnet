@@ -23,4 +23,8 @@ public static class ProductErrors
 
     public static ValidationException InvalidCategory() =>
         new("invalid_category", "The product needs a category.");
+
+    public static NotFoundException NotFound(int productId) =>
+        new("product_not_found", $"Product {productId} does not exist.");
+
 }

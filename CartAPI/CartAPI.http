@@ -19,3 +19,20 @@ Authorization: Bearer {{token}}
 
 ### Sin token -> 401
 GET {{CartAPI_HostAddress}}/api/auth/me
+
+
+
+
+
+### Products
+GET {{CartAPI_HostAddress}}/api/products
+Authorization: Bearer {{token}}
+
+### Search products
+GET {{CartAPI_HostAddress}}/api/products?search=Cafetera de goteo
+Authorization: Bearer {{token}}
+
+### Get product by id
+GET {{CartAPI_HostAddress}}/api/products/3
+Authorization: Bearer {{token}}
+

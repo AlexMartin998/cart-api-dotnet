@@ -13,6 +13,7 @@ internal static class ProductEndpoints
         var products = app.MapGroup("/api/products").WithTags("Products");
 
 
+        // ------------
         products.MapGet("/",
             async ([AsParameters] SearchProductsParameters p, SearchProductsQueryHandler handler, CancellationToken ct) =>
                 TypedResults.Ok(await handler.HandleAsync(
@@ -24,6 +25,17 @@ internal static class ProductEndpoints
         .WithSummary("Products list by search, category, price range and stock availability.")
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status401Unauthorized);
+
+        
+        // ------------
+        products.MapGet("/{id:int}",
+            async(int id, GetProductQueryHandler handler, CancellationToken ct) =>
+                TypedResults.Ok(await handler.HandleAsync(new GetProductQuery(id), ct))
+        )
+        .WithName("GetProduct")
+        .WithSummary("Get a product by id.")
+        .ProducesProblem(StatusCodes.Status401Unauthorized)
+        .ProducesProblem(StatusCodes.Status404NotFound);
 
         return app;
     }
