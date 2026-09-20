@@ -4,6 +4,7 @@ using CartAPI.Features.Ordering.Carts.Domain;
 namespace CartAPI.Features.Ordering.Carts.Application;
 
 
+// service application ---
 public sealed class CartPricer(ICatalogStock catalog)
 {
     public async Task<CartDto> PriceAsync(Cart? cart, CancellationToken ct)

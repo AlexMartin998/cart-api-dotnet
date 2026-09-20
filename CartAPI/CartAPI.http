@@ -51,3 +51,14 @@ Authorization: Bearer {{token}}
 GET {{CartAPI_HostAddress}}/api/cart
 Authorization: Bearer {{token}}
 
+
+### Add item to cart
+POST {{CartAPI_HostAddress}}/api/cart/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productId": 4,
+  "quantity": 1
+}
+

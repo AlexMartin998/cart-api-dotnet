@@ -24,16 +24,15 @@ public sealed class Cart
     private Cart() { }
 
 
+
+    //* -------------
     public static Cart Open(int userId, DateTime now)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(userId);
         return new Cart { UserId = userId, CreatedAt = now };
     }
 
-    
-    //* -------------
     public int QuantityOf(int productId) => Find(productId)?.Quantity ?? 0;
-
     
     public void AddOrIncrease(int productId, int quantity, DateTime now)
     {

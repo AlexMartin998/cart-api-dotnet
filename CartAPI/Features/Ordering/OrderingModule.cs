@@ -1,4 +1,5 @@
 using CartAPI.Features.Ordering.Carts.Application;
+using CartAPI.Features.Ordering.Carts.Application.Commands;
 using CartAPI.Features.Ordering.Carts.Application.Queries;
 using CartAPI.Features.Ordering.Carts.Domain;
 using CartAPI.Features.Ordering.Carts.Infrastructure.Http;
@@ -16,6 +17,7 @@ public static class OrderingModule
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<CartPricer>();
         services.AddScoped<GetMyCartQueryHandler>();
+        services.AddScoped<AddCartItemCommandHandler>();
         return services;
     }
 
