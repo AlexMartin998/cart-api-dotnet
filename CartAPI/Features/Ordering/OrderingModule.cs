@@ -7,8 +7,9 @@ using CartAPI.Features.Ordering.Carts.Infrastructure.Persistence;
 using CartAPI.Features.Ordering.Carts.Infrastructure.Persistence.Configurations;
 using CartAPI.Features.Ordering.Shared.Domain;
 using CartAPI.Features.Ordering.Shared.Infrastructure;
-using CartAPI.Features.Ordering.Orders.Application.Commands;
 using CartAPI.Features.Ordering.Orders.Domain;
+using CartAPI.Features.Ordering.Orders.Application.Commands;
+using CartAPI.Features.Ordering.Orders.Application.Queries;
 using CartAPI.Features.Ordering.Orders.Infrastructure.Http;
 using CartAPI.Features.Ordering.Orders.Infrastructure.Persistence;
 using CartAPI.Features.Ordering.Orders.Infrastructure.Persistence.Configurations;
@@ -45,6 +46,8 @@ public static class OrderingModule
         services.AddScoped<ClearCartCommandHandler>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<PlaceOrderCommandHandler>();
+        services.AddScoped<ListMyOrdersQueryHandler>();
+        services.AddScoped<GetMyOrderQueryHandler>();
         return services;
     }
 

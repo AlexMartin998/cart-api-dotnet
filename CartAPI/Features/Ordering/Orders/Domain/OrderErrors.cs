@@ -12,4 +12,7 @@ public static class OrderErrors
     public static ValidationException NoLines() =>
         new("order_without_lines", "An order needs at least one line.");
 
+    public static NotFoundException NotFound(int orderId) =>
+        new("order_not_found", $"Order {orderId} does not exist.");
+
 }

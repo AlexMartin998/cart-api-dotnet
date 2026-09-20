@@ -58,7 +58,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "productId": 3,
+  "productId": 1,
   "quantity": 1
 }
 
@@ -90,5 +90,22 @@ Authorization: Bearer {{token}}
 ### Place order
 POST {{CartAPI_HostAddress}}/api/orders
 Authorization: Bearer {{token}}
+
+
+### List my orders
+GET {{CartAPI_HostAddress}}/api/orders
+Authorization: Bearer {{token}}
+
+
+### List my orders paginated
+GET {{CartAPI_HostAddress}}/api/orders?page=1&pageSize=1
+Authorization: Bearer {{token}}
+
+
+### Get my order by id
+GET {{CartAPI_HostAddress}}/api/orders/1
+Authorization: Bearer {{token}}
+
+
 
 
