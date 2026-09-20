@@ -1,6 +1,7 @@
 using CartAPI.Features.Catalog.Contracts;
 using CartAPI.Features.Ordering.Carts.Application;
 using CartAPI.Features.Ordering.Carts.Application.Commands;
+using CartAPI.Features.Ordering.Shared.Domain;
 using CartAPI.Shared.Domain.Errors;
 using CartAPI.Tests.Unit.Ordering.Fakes;
 
@@ -17,7 +18,7 @@ public sealed class AddCartItemCommandHandlerTests
     public AddCartItemCommandHandlerTests()
     {
         var catalog = new FakeCatalog(new ProductSnapshot(4, "SKU-004", "Monitor", 249.99m, Stock: 2));
-        _handler = new AddCartItemCommandHandler(_carts, catalog, new CartPricer(catalog), _unitOfWork, TimeProvider.System);
+        _handler = new AddCartItemCommandHandler(_carts, catalog, new CartPricer(catalog, new OrderPricing(new DiscountPolicy(100m, 10m))), _unitOfWork, TimeProvider.System);
     }
 
 
@@ -33,6 +34,7 @@ public sealed class AddCartItemCommandHandlerTests
         var line = Assert.Single(cart.Items);
         Assert.Equal(2, line.Quantity);
         Assert.Equal(499.98m, cart.Subtotal);
+        Assert.Equal(50.00m, cart.Discount);
     }
 
 

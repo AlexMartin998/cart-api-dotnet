@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddAccountsModule(configuration);
         services.AddCatalogModule();
-        services.AddOrderingModule();
+        services.AddOrderingModule(configuration);
         return services;
     }
 

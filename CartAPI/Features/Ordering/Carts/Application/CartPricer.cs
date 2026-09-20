@@ -1,11 +1,12 @@
 using CartAPI.Features.Catalog.Contracts;
 using CartAPI.Features.Ordering.Carts.Domain;
+using CartAPI.Features.Ordering.Shared.Domain;
 
 namespace CartAPI.Features.Ordering.Carts.Application;
 
 
 // service application ---
-public sealed class CartPricer(ICatalogStock catalog)
+public sealed class CartPricer(ICatalogStock catalog, OrderPricing pricing)
 {
     public async Task<CartDto> PriceAsync(Cart? cart, CancellationToken ct)
     {
@@ -16,9 +17,8 @@ public sealed class CartPricer(ICatalogStock catalog)
         var snapshots = await catalog.PeekAsync([.. lines.Select(l => l.ProductId)], ct);
         var items = lines.Select(line => Price(line, snapshots.GetValueOrDefault(line.ProductId))).ToList();
 
-        var subtotal = items.Where(i => i.Status == CartItemStatus.Ok).Sum(i => i.LineTotal);
-        const decimal discount = 0m;
-        return new CartDto(items, items.Sum(i => i.Quantity), subtotal, discount, subtotal - discount);
+        var totals = pricing.For(items.Where(i => i.Status == CartItemStatus.Ok).Select(i => i.LineTotal));
+        return new CartDto(items, items.Sum(i => i.Quantity), totals.Subtotal, totals.Discount, totals.Total);
     }
 
     private static CartItemDto Price(CartLine line, ProductSnapshot? product)
